@@ -24,14 +24,14 @@ npm run preview
 
 Os arquivos de produção são gerados na pasta `dist/`.
 
-## Publicar gratuitamente no Cloudflare Pages
+## Publicar gratuitamente no Cloudflare Workers
 
 1. Envie este repositório para uma conta GitHub ou GitLab.
-2. No painel Cloudflare, abra **Workers & Pages → Create → Pages → Connect to Git** e selecione o repositório.
-3. Use `npm run build` como comando de build e `dist` como diretório de saída.
-4. Conclua a publicação. O arquivo `public/_redirects` mantém as rotas da aplicação funcionando como SPA.
+2. Instale as dependências com `npm install` e autentique o Wrangler com `npx wrangler login`, se necessário.
+3. Rode `npm run deploy:dry-run` para compilar e validar a configuração sem publicar.
+4. Rode `npm run deploy` para compilar e publicar o Worker. O `wrangler.jsonc` aponta para `dist/` e configura o fallback SPA nativo do Workers.
 
-O Cloudflare Pages oferece uma faixa gratuita, sujeita aos limites e termos vigentes do serviço. O OrçaFácil não exige backend, domínio próprio ou configuração de cartão para funcionar localmente.
+O projeto usa Workers com Static Assets; não configure uma regra catch-all em `_redirects`. O fallback `single-page-application` entrega `index.html` para rotas da aplicação que não correspondem a arquivos estáticos.
 
 ## Armazenamento e privacidade
 
